@@ -68,7 +68,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
           {mealConfig && (
             <div
               className="absolute left-0 right-0 flex items-center justify-center"
-              style={{ top: '4.25in', height: '1in' }}
+              style={{ top: '4.0in', height: '1in' }}
             >
               <div
                 className="flex items-center gap-2 rounded-full px-4 py-2"

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Attendee, searchAttendees, checkInAttendee } from '@/lib/api-client';
+import { Attendee, searchAttendees, checkInAttendee, uncheckInAttendee } from '@/lib/api-client';
 import { Badge } from './Badge';
 
 interface SearchKioskProps {
@@ -111,12 +111,6 @@ export function SearchKiosk({ onAdminClick }: SearchKioskProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#0d0d14]" onClick={resetTimer}>
-      {/* Animated background */}
-      <div className="no-print pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 h-full w-full animate-spin-slow rounded-full bg-gradient-to-br from-amber-500/10 via-transparent to-transparent" style={{ animationDuration: '60s' }} />
-        <div className="absolute -bottom-1/2 -right-1/2 h-full w-full animate-spin-slow rounded-full bg-gradient-to-tl from-orange-500/10 via-transparent to-transparent" style={{ animationDuration: '45s', animationDirection: 'reverse' }} />
-      </div>
-
       {/* Header */}
       <header className="no-print relative z-10 flex items-center justify-between px-8 py-6">
         <div className="flex items-center gap-4">
@@ -266,6 +260,22 @@ export function SearchKiosk({ onAdminClick }: SearchKioskProps) {
                   <div className="mb-4 rounded-xl bg-amber-500/20 border-2 border-amber-500 px-6 py-4">
                     <h2 className="text-2xl font-bold text-amber-400">⚠️ Already Checked In</h2>
                     <p className="mt-2 text-amber-200/80">This person has already checked in and received their badge.</p>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        if (!selectedAttendee) return;
+                        const result = await uncheckInAttendee(selectedAttendee.id);
+                        if (result.success && result.attendee) {
+                          setSelectedAttendee(result.attendee);
+                          setAlreadyCheckedIn(false);
+                          const searchResults = await searchAttendees(query);
+                          setResults(searchResults);
+                        }
+                      }}
+                      className="mt-4 rounded-lg border-2 border-amber-400 bg-amber-500/30 px-4 py-2 text-sm font-bold text-amber-100 transition-colors hover:bg-amber-500/50"
+                    >
+                      Uncheck (allow print again)
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -330,15 +340,6 @@ export function SearchKiosk({ onAdminClick }: SearchKioskProps) {
         
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
-        }
-        
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        
-        .animate-spin-slow {
-          animation: spin-slow 60s linear infinite;
         }
         
         @media print {

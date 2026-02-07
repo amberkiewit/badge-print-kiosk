@@ -36,13 +36,13 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         >
           {/* Background SVG */}
           <img
-            src="/KIE_2026_Name Tags_3.svg"
+            src="/KIE_2026_badges_rev1.SVG"
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
             style={{ objectFit: 'fill' }}
           />
 
-          {/* Top half content area - name and meal centered in first 3 inches */}
+          {/* Top half content area - name centered in first 3 inches */}
           <div 
             className="absolute top-0 left-0 right-0 flex flex-col items-center justify-center"
             style={{ height: '3in' }}
@@ -62,23 +62,29 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
                 {attendee.last_name}
               </div>
             </div>
-
-            {/* Meal preference indicator */}
-            {mealConfig && (
-              <div 
-                className="mt-4 flex items-center gap-2 rounded-full px-4 py-2"
-                style={{ backgroundColor: mealConfig.color + '20', border: `2px solid ${mealConfig.color}` }}
-              >
-                <span className="text-xl">{mealConfig.icon}</span>
-                <span 
-                  className="text-sm font-bold uppercase tracking-wider"
-                  style={{ color: mealConfig.color }}
-                >
-                  {attendee.meal_preference}
-                </span>
-              </div>
-            )}
           </div>
+
+          {/* Meal preference indicator - positioned lower, flipped vertically */}
+          {mealConfig && (
+            <div
+              className="absolute flex items-center gap-2 rounded-full px-4 py-2"
+              style={{
+                top: '1.5in',
+                left: '0.58in',
+                transform: 'scaleY(-1)',
+                backgroundColor: mealConfig.color + '20',
+                border: `2px solid ${mealConfig.color}`,
+              }}
+            >
+              <span className="text-xl">{mealConfig.icon}</span>
+              <span
+                className="text-sm font-bold uppercase tracking-wider"
+                style={{ color: mealConfig.color }}
+              >
+                {attendee.meal_preference}
+              </span>
+            </div>
+          )}
         </div>
 
         {showPrintButton && (

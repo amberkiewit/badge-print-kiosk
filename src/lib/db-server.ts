@@ -93,6 +93,16 @@ export async function checkInAttendee(id: number): Promise<{ success: boolean; a
   return { success: true, alreadyCheckedIn: false };
 }
 
+// Undo check-in for an attendee
+export async function undoCheckIn(id: number): Promise<{ success: boolean }> {
+  const result = await sql`
+    UPDATE attendees
+    SET checked_in = FALSE, checked_in_at = NULL
+    WHERE id = ${id}
+  `;
+  return { success: (result.rowCount ?? 0) > 0 };
+}
+
 // Get statistics
 export async function getStats(): Promise<{ total: number; checkedIn: number }> {
   const totalResult = await sql`SELECT COUNT(*) as count FROM attendees`;

@@ -30,6 +30,18 @@ export async function checkInAttendee(id: number): Promise<{
   return response.json();
 }
 
+export async function uncheckInAttendee(id: number): Promise<{
+  success: boolean;
+  attendee?: Attendee;
+}> {
+  const response = await fetch('/api/attendees/check-in/undo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  return response.json();
+}
+
 export async function importCSV(csvContent: string): Promise<{
   success: boolean;
   insertedCount?: number;

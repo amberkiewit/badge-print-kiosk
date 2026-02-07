@@ -64,25 +64,28 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
             </div>
           </div>
 
-          {/* Meal preference indicator - positioned lower, flipped vertically */}
+          {/* Meal preference indicator - centered on label, flipped vertically and horizontally */}
           {mealConfig && (
             <div
-              className="absolute flex items-center gap-2 rounded-full px-4 py-2"
-              style={{
-                top: '1.5in',
-                left: '0.58in',
-                transform: 'scaleY(-1)',
-                backgroundColor: mealConfig.color + '20',
-                border: `2px solid ${mealConfig.color}`,
-              }}
+              className="absolute left-0 right-0 flex items-center justify-center"
+              style={{ top: '2.25in', height: '1in' }}
             >
-              <span className="text-xl">{mealConfig.icon}</span>
-              <span
-                className="text-sm font-bold uppercase tracking-wider"
-                style={{ color: mealConfig.color }}
+              <div
+                className="flex items-center gap-2 rounded-full px-4 py-2"
+                style={{
+                  transform: 'scale(-1, -1)',
+                  backgroundColor: mealConfig.color + '20',
+                  border: `2px solid ${mealConfig.color}`,
+                }}
               >
-                {attendee.meal_preference}
-              </span>
+                <span className="text-xl">{mealConfig.icon}</span>
+                <span
+                  className="text-sm font-bold uppercase tracking-wider"
+                  style={{ color: mealConfig.color }}
+                >
+                  {attendee.meal_preference}
+                </span>
+              </div>
             </div>
           )}
         </div>

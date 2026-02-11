@@ -36,7 +36,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         >
           {/* Background SVG */}
           <img
-            src="/KIE_2026_badges_rev1.SVG"
+            src="/KIE_2026_badges_fnl.SVG"
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
             style={{ objectFit: 'fill' }}
@@ -74,7 +74,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
                 className="flex items-center gap-2 rounded-full px-4 py-2"
                 style={{
                   transform: 'scale(-1, -1)',
-                  backgroundColor: mealConfig.color + '20',
+                  backgroundColor: mealConfig.color + '40',
                   border: `2px solid ${mealConfig.color}`,
                 }}
               >

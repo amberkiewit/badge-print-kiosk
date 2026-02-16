@@ -33,7 +33,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         >
           {/* Background SVG */}
           <img
-            src="/KIE_2026_badges_fnl.svg"
+            src="/KIE_2026_badges_fnl_final.svg"
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
             style={{ objectFit: 'fill' }}

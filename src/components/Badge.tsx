@@ -10,9 +10,6 @@ interface BadgeProps {
 }
 
 const MEAL_ICONS: Record<string, { icon: string; color: string }> = {
-  'vegetarian': { icon: '🥬', color: '#22c55e' },
-  'vegan': { icon: '🌱', color: '#22c55e' },
-  'gluten free': { icon: '🌾', color: '#f59e0b' },
   'halal': { icon: '☪', color: '#3b82f6' },
 };
 
@@ -78,7 +75,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
                   border: `2px solid ${mealConfig.color}`,
                 }}
               >
-                <span className="text-xl">{mealConfig.icon}</span>
+                <span className="text-xl" style={{ color: '#1e3a5f' }}>{mealConfig.icon}</span>
                 <span
                   className="text-sm font-bold uppercase tracking-wider"
                   style={{ color: mealConfig.color }}
